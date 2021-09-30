@@ -485,7 +485,7 @@ footer {
     .subblock {
         padding: 0;
     }
-
+}
 @media (max-width: 960px) {
     .burger {
         display: block;
