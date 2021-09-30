@@ -10,6 +10,7 @@
 
 body {
     margin: 0;
+    text-align: center;
 }
 
 hr {
@@ -25,10 +26,23 @@ h3 {
     font-size: 32px;
 }
 
+h4 {
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
 header {
     background-color: #000;
     color: #fff;
-    text-align: center;
     height: 30px;
     width: 100%;
     padding: 7px;
@@ -48,13 +62,15 @@ nav {
     padding: 0px 20px;
 }
 
+.logo {
+    height: 36px; 
+}
+
 nav li {
-    list-style: none;
     display: inline-block;
 }
 
 .nav-link {
-    text-decoration: none;
     margin-left: 23px;
     font-size: 14px;
     text-transform: uppercase;
@@ -65,13 +81,24 @@ nav li {
     border-bottom: 1px solid;
 }
 
+.burger {
+    display: none;
+}
+
+.burger-line {
+    display: block;
+    margin: 5px;
+    height: 5px;
+    width: 50px;
+    background-color: #000;
+}
+
 .welcome-sub {
     background-image: url("img/background.jpg"), linear-gradient(45deg, #f5f7fa, #c3cfe2);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 90vh;
-    text-align: center;
     padding-top: 50px;
 }
 
@@ -88,7 +115,6 @@ nav li {
 }
 
 .btn {
-    text-decoration: none;
     width: 200px;
     height: 30px;
     background-color: #FF4A32;
@@ -118,7 +144,6 @@ nav li {
 }
 
 .choice {
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,7 +153,6 @@ nav li {
 
 .choice-descr {
     max-width: 685px;
-    text-align: center;
 }
 
 .choice-descr p {
@@ -138,9 +162,8 @@ nav li {
 }
 
 .choice-blocks {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
+    justify-content: center;
 }
 
 .choice-block {
@@ -148,17 +171,12 @@ nav li {
     height: 580px;
     background-color: #2b5e60;
     display: block;
-    text-decoration: none;
     color: #fff;
     padding: 225px 170px;
     margin: 45px 10px 20px 10px;
+    background-position: center;
+    background-size: cover;
     transition: .5s;
-}
-
-.choice-block h4 {
-    font-size: 25px;
-    font-weight: 400;
-    margin: 0;
 }
 
 .choice-block:hover {
@@ -187,7 +205,6 @@ nav li {
     display: flex;
     align-items: center;
     flex-direction: column;
-    text-align: center;
 }
 
 .elec-skate p {
@@ -208,6 +225,7 @@ nav li {
 .boosted-rev {
     display: flex;
     justify-content: center;
+    text-align: left;
 }
 
 .boosted-rev-block {
@@ -216,6 +234,268 @@ nav li {
     margin: 45px 10px;
 }
 
+.boosted-rev-block img{
+    width: 380px;
+    height: 380px;
+}
+
 .subblock {
     padding: 65px 20px;
+}
+
+.shop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 55px;
+}
+
+.shop-block {
+    width: 100%;
+    height: 33.3%;
+    background-color: #2b5e60;
+    display: block;
+    color: #fff;
+    padding: 208px 0 203px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.shop-block p {
+    text-transform: uppercase;
+}
+
+.stealth {
+    background-image: url(img/shop_stealth.jpg);
+}
+
+.plus {
+    background-image: url(img/shop_plus.jpg);
+}
+
+.mini {
+    background-image: url(img/shop_mini.jpg);
+}
+
+.video {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 64px;
+}
+
+.video iframe {
+    padding: 0 20px;
+}
+
+.accessories {
+    width: 100%;
+}
+
+.accessories h3 {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.accessories-blocks {
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+    margin-bottom: 4px;
+}
+
+.accessories-block {
+    margin: 0px 20px;
+    width: 186px;
+    height: 241px;
+}
+
+.accessories-block img{
+    height: 150px;
+    width: 150px;
+}
+
+.accessories-block h6 {
+    font-weight: 400;
+    color:#FF4A32;
+    font-size: 15px;
+    margin: 12px 0px 3px 0px;
+    transition: .5s;
+}
+
+.accessories-block p {
+    font-size: 14px;
+    margin: 0;
+    color: #373737;
+}
+
+.accessories-block strong {
+    color: #FF2121;
+}
+
+.accessories-block:hover {
+    border: 1px solid #000;
+}
+
+.sold-p {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.separator {
+    height: 66px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 0px 10px rgba(41, 44, 61, 0.34);
+    margin-bottom: 28px;
+}
+
+.advantages {
+    background-color: #000;
+    height: 310px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    padding: 35px 0px 75px 0px;
+}
+
+.advantages img {
+    height: 87px;
+    width: 87px;
+}
+
+.advantages h3 {
+    font-size: 32px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.advantages p {
+    font-size: 15px;
+    margin: 0px;
+}
+
+.advant-block {
+    max-width: 270px;
+    margin: 0px 70px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer-blocks {
+    background-color: #F7F7F7;
+    height: 330px;
+    padding: 50px 130px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-block {
+    text-align: left;
+}
+
+.footer-block h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.footer-block p {
+    font-size: 14px;
+    max-width: 367px;
+}
+
+.footer-link {
+    color: #000;
+}
+
+.footer-link:hover {
+    color: #373737;
+}
+
+.footer-bottom {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1120px;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: #FF4A32;
+}
+
+@media (max-width: 1320px) {
+    .choice-block {
+        width: 380px;
+        height: 380px;
+        padding: 0px;
+        padding-top: 90px;
+    }
+
+    .accessories-block:last-child {
+        display: none;
+    }
+
+    .footer-bottom {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .accessories-block img {
+        height: 100px;
+        width: 100px;
+    }
+
+    .recalling img {
+        margin: 0 35px;
+        width: 10%;
+    }
+
+    .advantages {
+        flex-wrap: wrap;
+        height: 620px;
+    }
+
+    .footer-blocks {
+        padding: 40px 40px;
+    }
+
+    .boosted-rev-block {
+        width: 25%;
+        height: 25%;
+    }
+    
+    .boosted-rev-block img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .subblock {
+        padding: 0;
+    }
+
+@media (max-width: 960px) {
+    .burger {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    .boosted-rev-block h3{
+        margin: 5px;
+    }
 }
