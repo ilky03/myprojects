@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap');
+
+body {
+	margin: 0;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.1em;
+	color: black;
+	background-color: #f0f0f0;
+}
+body p {
+	opacity: 0.8;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 980px;
+	background-color: white;
+	margin: 0 auto;
+	-webkit-box-shadow: 0px 0px 35px -10px rgba(0,0,0,0.18);
+	-moz-box-shadow: 0px 0px 35px -10px rgba(0,0,0,0.18);
+	box-shadow: 0px 0px 35px -10px rgba(0,0,0,0.18);
+	text-align: left;
+	line-height: 2em;
+	border-radius: 15px;
+}
+
+ img {
+ 	border-radius: 15px;
+ }
+
+.container p {
+	margin: 20px;
+}
+
+.header {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 35px 0;
+}
+
+/* Nav
+===========================*/
+.nav {
+	display: flex;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin: 0 auto;
+	opacity: 0.8;
+}
+
+.nav__link {
+	margin-left: 50px;
+	color: #000;
+	text-decoration: none;
+	opacity: .8;
+	transition: opacity .1s linear;
+}
+
+.nav__link:first-child {
+	margin-left: 0;
+}
+
+.nav__link:last-child {
+	margin-right: 65px;
+}
+
+.nav__link:hover {
+	color: #66e0ff;
+}
+
+.logo {
+	margin-left: 30px;
+}
+
+footer {
+	background-color: #777;
+	color: white;
+	margin-top: 30px;
+	font-size: 0.7em;
+	height: 20px;
+}
+
+.spr {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+
+}
+
+.img__spr {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+h6 {
+	margin-top: 5px;
+	margin-bottom: 6px;
+}
+
+.dzherelo {
+	color: #000;
+	text-decoration: none;
+	opacity: .8;
+	transition: opacity .1s linear;
+	font-size: 13px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.dzherelo:hover {
+	color: #66e0ff;
+}
+
+ul {
+	margin: 0 auto;
+	font-weight: 800;
+	color: #777;
+}
+.ul__back {
+	background-color: #f5f5f0;
+}
+
+hr {
+	color: #777;
+	size: 100px;
+	width: 50px;
+}
+
+.center__img {
+	text-align: center;
+	opacity: 1;
+}
+
+h3, h2 {
+	margin: 0 auto;
+}
+
+.zv{
+	font-size: 2em;
+	color: #66e0ff;
+	text-align: center;
+}
+
+.zvv{
+	font-size: 2em;
+	color: #777;
+	text-align: center;
+}
+
+iframe {
+	border-radius: 15px;
+}
+
+.intelect {
+	color: black;
+}
