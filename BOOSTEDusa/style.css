@@ -18,7 +18,7 @@ hr {
     width: 70px;
     height: 2px;
     background: #CFCFCF;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 h3 {
@@ -59,7 +59,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 66px;
-    padding: 0px 20px;
+    padding: 0 20px;
 }
 
 .logo {
@@ -125,9 +125,9 @@ nav li {
 }
 
 .btn:hover{
-    -webkit-box-shadow: 0px 0px 34px 21px rgba(255, 74, 50, 0.4);
-    -moz-box-shadow: 0px 0px 34px 21px rgba(255, 74, 50, 0.4);
-    box-shadow: 0px 0px 34px 21px rgba(255, 74, 50, 0.4);
+    -webkit-box-shadow: 0 0 34px 21px rgba(255, 74, 50, 0.4);
+    -moz-box-shadow: 0 0 34px 21px rgba(255, 74, 50, 0.4);
+    box-shadow: 0 0 34px 21px rgba(255, 74, 50, 0.4);
 }
 
 .recalling {
@@ -181,9 +181,9 @@ nav li {
 
 .choice-block:hover {
     transform: translateY(-20px);
-    -webkit-box-shadow: 0px 0px 21px 8px rgba(34, 60, 80, 0.22);
-    -moz-box-shadow: 0px 0px 21px 8px rgba(34, 60, 80, 0.22);
-    box-shadow: 0px 0px 21px 8px rgba(34, 60, 80, 0.22);
+    -webkit-box-shadow: 0 0 21px 8px rgba(34, 60, 80, 0.22);
+    -moz-box-shadow: 0 0 21px 8px rgba(34, 60, 80, 0.22);
+    box-shadow: 0 0 21px 8px rgba(34, 60, 80, 0.22);
 }
 
 .boards{
@@ -208,7 +208,7 @@ nav li {
 }
 
 .elec-skate p {
-    margin: 0px;
+    margin: 0;
 }
 
 .elec-skate h2 {
@@ -304,7 +304,7 @@ nav li {
 }
 
 .accessories-block {
-    margin: 0px 20px;
+    margin: 0 20px;
     width: 186px;
     height: 241px;
 }
@@ -318,7 +318,7 @@ nav li {
     font-weight: 400;
     color:#FF4A32;
     font-size: 15px;
-    margin: 12px 0px 3px 0px;
+    margin: 12px 0 3px 0;
     transition: .5s;
 }
 
@@ -343,7 +343,7 @@ nav li {
 .separator {
     height: 66px;
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: 2px 0px 10px rgba(41, 44, 61, 0.34);
+    box-shadow: 2px 0 10px rgba(41, 44, 61, 0.34);
     margin-bottom: 28px;
 }
 
@@ -353,7 +353,7 @@ nav li {
     display: flex;
     justify-content: center;
     color: #fff;
-    padding: 35px 0px 75px 0px;
+    padding: 35px 0 75px 0;
 }
 
 .advantages img {
@@ -369,12 +369,12 @@ nav li {
 
 .advantages p {
     font-size: 15px;
-    margin: 0px;
+    margin: 0;
 }
 
 .advant-block {
     max-width: 270px;
-    margin: 0px 70px;
+    margin: 0 70px;
 }
 
 footer {
@@ -437,7 +437,7 @@ footer {
     .choice-block {
         width: 380px;
         height: 380px;
-        padding: 0px;
+        padding: 0;
         padding-top: 90px;
     }
 
