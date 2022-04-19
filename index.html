@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Bonheur+Royale&display=swap');
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: #FEFEFE;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }   
+
+        #projects {
+            background-color: #FEFEFE;
+            color: #897CB1;
+            padding: 50px 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            -webkit-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+            -moz-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+            box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            max-width: 1700px;
+        }
+
+        .project-link {
+            margin: 10px;
+            transition: .8s;
+        }
+
+        .project-link:hover {
+            transform: translateY(-10px);
+            background-color: #897CB1;
+            color: #fefefe;
+            -webkit-box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
+            -moz-box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
+            box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
+            border-radius: 30px;
+        }
+
+        .project-img {
+            height: 350px;
+            width: 90%;
+            object-fit: cover;
+            border-radius: 30px;
+            padding-top: 10px;
+        }
+
+        @media (max-width: 1200px) {
+            .projects {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .projects {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        @media  (max-width: 400px) {
+            #projects {
+                display: block;
+            }
+
+            .project-img {
+                height: 200px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <section id="projects">
+        <h3>My projects<br>github.com/ilky03</h3>
+        <div class="projects">
+            <a href="https://ilky03.github.io/myprojects/SWELL" class="project-link" target="_blank">
+                <img src="img/swell.png" alt="project image" class="project-img">
+                <p>SWELL - Layout Figma</p>
+            </a>
+            <a href="https://ilky03.github.io/myprojects/BOOSTEDusa" class="project-link" target="_blank">
+                <img src="img/boosted.png" alt="project image" class="project-img">
+                <p>BOOSTEDusa - Layout Figma</p>
+            </a>
+            <a href="https://ilky03.github.io/myprojects/university/vstup" class="project-link" target="_blank">
+                <img src="img/univer.png" alt="project image" class="project-img">
+                <p>Site presentation for university</p>
+            </a>
+            <a href="https://ilky03.github.io/freecodecamp/first-challenge/" class="project-link" target="_blank">
+                <img src="img/fcc_survey.png" alt="project image" class="project-img">
+                <p>Survey Form - FreeCodeCamp</p>
+            </a>
+            <a href="https://ilky03.github.io/freecodecamp/second-challenge/" class="project-link" target="_blank">
+                <img src="img/fcc_dr.png" alt="project image" class="project-img">
+                <p>Tribute Page - FreeCodeCamp</p>
+            </a>
+            <a href="https://ilky03.github.io/freecodecamp/third-challenge/" class="project-link" target="_blank">
+                <img src="img/fcc_js.png" alt="project image" class="project-img">
+                <p>Technical Documentation Page - FreeCodeCamp</p>
+            </a>
+            <a href="https://ilky03.github.io/freecodecamp/fourth-challenge/" class="project-link" target="_blank">
+                <img src="img/fcc_m.png" alt="project image" class="project-img">
+                <p>Product Landing Page - FreeCodeCamp</p>
+            </a>
+            <a href="https://ilky03.github.io/freecodecamp/last-challenge/#projects" class="project-link" target="_blank">
+                <img src="img/fcc_portfolio.png" alt="project image" class="project-img">
+                <p>Personal Portfolio Webpage - FreeCodeCamp</p>
+            </a>
+        </div>
+    </section>
+</body>
+</html>
