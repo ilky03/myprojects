@@ -60,7 +60,7 @@ let bg1 = new Map('img/bg-1.jpg', 1.5, 'img/pipeUp_bg-1.png', 'img/pipeBottom_bg
 let bird = new Character('bird', 3, 25, 'img/bird.png');
 let gap = 100;
 
-document.addEventListener("keydown", moveUp);
+document.addEventListener("click", moveUp);
 
 function moveUp() {
     bird.yPos -= 25;
