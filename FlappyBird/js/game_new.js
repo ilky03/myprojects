@@ -48,6 +48,11 @@ class Map {
 
 class RatingTable {
     constructor() {
+        if (JSON.parse(localStorage.getItem('user1')) === null) {
+            localStorage.setItem('user1', JSON.stringify([1, 3, -, -]));
+            localStorage.setItem('user2', JSON.stringify([2, 2, -, -]));
+            localStorage.setItem('user3', JSON.stringify([3, 1, -, -]));
+        }
         this.user1 = JSON.parse(localStorage.getItem('user1'));
         this.user2 = JSON.parse(localStorage.getItem('user2'));
         this.user3 = JSON.parse(localStorage.getItem('user3'));
