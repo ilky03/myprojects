@@ -1,3 +1,7 @@
+localStorage.setItem('user1', JSON.stringify([1, 3, 1, 1]));
+localStorage.setItem('user2', JSON.stringify([2, 2, 2, 2]));
+localStorage.setItem('user3', JSON.stringify([3, 1, 3, 3]));
+
 let cvs = document.getElementById('canvas');
 let ctx = cvs.getContext('2d');
 
