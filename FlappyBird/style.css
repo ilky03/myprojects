@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'PixelFont';
+    src: url("fonts/PixelFont.ttf");
+}
+* {
+    font-family: 'PixelFont', cursive;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+}
+
+#head_container {
+    height: 90vh;
+}
+
+.container {
+    margin: 20px;
+}
+
+.start_menu h1 {
+    margin-bottom: 0;
+}
+.start_menu h4 {
+    color: orange;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+
+table {
+    font-size: 15px;
+    display: inline-block;
+}
+
+th {
+    padding: 20px;
+}
+
+tr:hover {
+    color: orange;
+}
+
+#table_score  h1{
+    color: red;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+#table_score p {
+    margin-top: 50px;
+    color: orange;
+}
+
+input {
+    border: 0;
+    padding: 5px;
+}
+
+input:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+
+.show_cont img{
+    width: auto;
+    height: 50px;
+    margin-top: 50px;
+}
+
+.show_cont p {
+    font-size: 10px;
+    color: orange;
+}
+
+#map {
+    width: auto;
+    height: 200px;
+}
+
+#nickname {
+    border: 2px solid;
+}
+
+.rip_gif {
+    height:300px;
+    width: auto;
+}
+
+@media (max-width: 700px) {
+    table {
+        overflow-x: auto;
+    }
+}
