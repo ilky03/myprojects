@@ -1,8 +1,0 @@
-@font-face {
-    font-family: 'PixelFont';
-    src: url("fonts/PixelFont.ttf");
-}
-* {
-    font-family: 'PixelFont', cursive;
-    margin: 0;
-}
