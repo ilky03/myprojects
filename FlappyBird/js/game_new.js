@@ -198,6 +198,7 @@ function draw() {
                 ratingTable.makeRating(player.nickname, player.highScore, mapAtThisMoment.name, skinAtThisMoment.name);
 
                 let tableHTML = document.getElementById('table_score');
+                tableHTML.style.overflow = 'auto';
                 tableHTML.innerHTML = '<h1>GAME OVER</h1><p><img src= "img/rip.gif" class="rip_gif"></p><h4>HIGHSCORE TABLE</h4><table><tr><th>Nickname</th><th>HighScore</th><th>Map</th><th>Bird</th></tr>'+
                     `<tr><th>${ratingTable.user1[0]}</th><th>${ratingTable.user1[1]}</th><th>${ratingTable.user1[2]}</th><th>${ratingTable.user1[3]}</th></th>`+
                     `<tr><th>${ratingTable.user2[0]}</th><th>${ratingTable.user2[1]}</th><th>${ratingTable.user2[2]}</th><th>${ratingTable.user2[3]}</th></th>`+
