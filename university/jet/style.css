@@ -109,3 +109,10 @@ a {
 .head-nav a:hover {
     background-color: #c2e7ff;
 }
+
+@media(max-height: 1150px) {
+    body {
+        overflow: auto;
+        height: auto;
+    }
+}
