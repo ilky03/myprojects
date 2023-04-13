@@ -89,14 +89,17 @@ a {
 }
 
 .head-nav {
-    margin: 45px 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .head-nav a {
     background-color: #f8fafd;
     padding: 20px 40px;
     border-radius: 50px;
-    margin: 0 20px;
+    margin: 20px 20px;
 }
 
 .head-nav img {
