@@ -110,7 +110,7 @@ a {
     background-color: #c2e7ff;
 }
 
-@media(max-height: 1150px) {
+@media(max-height: 750px) {
     body {
         overflow: auto;
         height: auto;
