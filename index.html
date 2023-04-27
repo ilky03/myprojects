@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="welcome-window">
+        <div><img src="img/icon.svg" alt="icon" width="20px"></div>
+        <button class="btn create-poll">Створити опитування</button>
+        <button class="btn join-poll">Приєднатись до опитування</button>                     
+    </div>
+
+    <div class="create-window hide">
+        <div class="create-quest-altern">
+            <div>
+                <label for="amount-altern">Кількість альтернатив</label> 
+                <input id="amount-altern" type="number" name="amount-altern" min="1" required />
+            </div>
+            <div style="text-align: center;">
+                <button class="apply-create btn">Примінити</button>
+            </div>
+        </div>
+        <form action="#" class="create-form hide">
+            <div>
+                <label for="name-poll">Назва опитування</label> 
+                <input id="name-poll" type="text" name="name-poll" required/>
+            </div>
+            <div>
+                <label for="scale-type">Тип шкали оцінювання</label> 
+                <select name="scale-type" id="scale-type"> 
+                    <option selected disabled>Оберіть тип шкали</option>
+                    <option value="color">Кольорова</option>
+                    <option value="numeric">Числова</option>
+                    <option value="slider">Повзунок</option>
+                    <option value="video">Відео</option>
+                    <option value="image">Зображення</option>
+                </select>
+            </div>
+            <div>
+                <label for="altern-type">Тип альтернатив</label> 
+                <select name="altern-type" id="altern-type">
+                    <option selected disabled>Оберіть тип альтернатив</option>
+                    <option value="text">Текст</option>
+                    <option value="image">Зображення</option>
+                    <option value="video">Відео</option>
+                </select>
+            </div>
+            </form>
+        
+    </div>
+
+    <div class="succes-window hide">
+    </div>
+
+    <div class="join-window hide">
+        <div>
+            <label for="poll-id">Уведіть id опитування</label> 
+            <input id="poll-id" type="number" min="1" name="poll-id" placeholder="1, 2, 3..." required/>
+            <button class="btn choose-id-btn">Приєднатись</button>
+        </div>
+    </div>
+
+    <div class="head-window hide">
+    </div>
+
+    <div class="result-window hide">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
