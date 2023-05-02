@@ -156,23 +156,23 @@ form img {
     justify-content: space-around;
 }
 .r1 {
-    background-color: #4B0082;
+    background-color: rgba(75, 0, 130, 0.2);
 }
 
 .r2 {
-    background-color: #8B008B;
+    background-color: rgba(75, 0, 130, 0.4);
 }
 
 .r3 {
-    background-color: #8A2BE2;
+    background-color: rgba(75, 0, 130, 0.6);
 }
 
 .r4 {
-    background-color: #BA55D3;
+    background-color: rgba(75, 0, 130, 0.8);
 }
 
 .r5 {
-    background-color: #DDA0DD;
+    background-color: rgba(75, 0, 130, 1);
 }
 
 .example {
@@ -200,7 +200,19 @@ form img {
     padding: 0;
 }
 
-
+@media(max-width: 720px) {
+    .results {
+        width: auto;
+    }
+    input, select, button {
+        width: 80%;
+        height: 60px;
+    }
+    .altern-img {
+        width: 90%;
+        height: auto;
+    }
+}
 
 
 

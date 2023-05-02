@@ -34,11 +34,9 @@ applyCreateBtn.addEventListener('click', () => {
 
         scaleType.addEventListener('change', (e) => {
             e.preventDefault();
-            // scaleType.disabled = true;
             let type = scaleType.value;
 
             if (type == "image") {
-                // let amountScale = +prompt('Скільки буде зображень для шкали оцінювання?');
                 let amountScale = 5;
                 for (let i = 1; i <= amountScale; i++) {
                     createForm.insertAdjacentHTML("beforeend", `
@@ -55,7 +53,6 @@ applyCreateBtn.addEventListener('click', () => {
         const alternType = document.querySelector('#altern-type');
         alternType.addEventListener('change', (e )=> {
             e.preventDefault();
-            // alternType.disabled = true;
             let type = alternType.value;
 
             if (type == "video" || type == "image") {
@@ -96,7 +93,6 @@ applyCreateBtn.addEventListener('click', () => {
 
         postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json', json)
             .then(data => {
-                console.log(data.name);
                 let id = data.name;
                 succesWindow.innerHTML = `
                     <div><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
@@ -133,14 +129,25 @@ joinBtn.addEventListener('click', () => {
     joinWindow.classList.remove('hide');
 
     const chooseIdBtn = document.querySelector('.choose-id-btn');
+    const checkIdBtn = document.querySelector('.check-id-btn');
     chooseIdBtn.addEventListener('click', () => {
         let pollId = document.querySelector('#poll-id').value;
         joinWindow.classList.add('hide');
         headWindow.classList.remove('hide');
         showHeadWindow(pollId);
     });
-});
 
+    checkIdBtn.addEventListener('click', () => {
+        let pollId = document.querySelector('#poll-id').value;
+        joinWindow.classList.add('hide');
+        resultWindow.classList.remove('hide');
+        getResource('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json')
+        .then(data => {
+            let currentPoll = data[pollId];
+            showResults(pollId, currentPoll);
+        });
+    });
+});
 
 //Head window
 const headWindow = document.querySelector('.head-window');
@@ -161,12 +168,6 @@ function showHeadWindow(id) {
 
             let currentPoll = data[id];
 
-            // const pollData = {};
-            // for (const [key, value] of data.entries()) {
-            //     pollData[key] = value;
-            // }
-            // let currentPoll = pollData[id];
-            // console.log(currentPoll);
             headWindow.innerHTML += `
                 <h2>${currentPoll['name-poll']}</h2>
                 <form class="answer-form">
@@ -248,7 +249,6 @@ function showHeadWindow(id) {
                 
                 postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/answers.json', json)
                 .then(data => {
-                console.log(data);
                 })
                 .catch(error => console.error(error));
         
@@ -259,7 +259,7 @@ function showHeadWindow(id) {
 
             function addScale(i) {
                 if (currentPoll['scale-type'] == 'numeric') {
-                    let str = `<input type="number" min="1" max="5" name="answer-to-${temp}" value="0">`;
+                    let str = `<input type="number" min="1" max="5" name="answer-to-${temp}">`;
                     temp += 1;
                     return str;
                 }
@@ -288,14 +288,6 @@ function showHeadWindow(id) {
         });
 }
 
-
-// let range = document.querySelector('.range');
-// let rangeL = document.querySelector('.range-label')
-
-// setInterval (() => {
-//         rangeL.textContent = range.value;
-// }, 1);
-
 //Result window
 
 const resultWindow = document.querySelector('.result-window');
@@ -310,26 +302,12 @@ function showResults(id, currentPoll) {
                 answersToThisPoll.push(answers[key]);
             }
         }
-        console.log(answersToThisPoll);
 
-        // for (const [key, value] of data.entries()) {
-        //     answers[key] = value;
-        //     counter++;
-        // }
-    
-        //обчислення
         let countOfAnswers = answersToThisPoll.length;
         let numOfAltern = 0;
         let answersAverage = {};
         let sum = 0;
         let answersDom = {};
-
-        // for (let i = 0; i < counter; i++) {
-        //     let answer = answers[i];
-        //     if (answer.pollId == id) {
-        //         countOfAnswers++;
-        //     }
-        // }
 
         for (key in currentPoll) {
             if (key.includes('altern-name')) {
@@ -340,10 +318,7 @@ function showResults(id, currentPoll) {
         for (let j = 1; j <= numOfAltern; j++) {
             answersDom[j] = {'1':0,'2':0,'3':0,'4':0,'5':0};
         }
-
-        // console.log(answersDom);
-        console.log('Відповідей: ' + countOfAnswers + ' ' + '\nК-сть альтернатив: ' + numOfAltern);
-        
+ 
         for (let k = 1; k <= numOfAltern; k++) {
             for (let i = 0; i < countOfAnswers; i++) {
                 let answer = answersToThisPoll[i];
@@ -353,9 +328,6 @@ function showResults(id, currentPoll) {
             answersAverage[`answer-average-${k}`] = (sum / countOfAnswers).toFixed(2);
             sum = 0;
         }
-
-        console.log(answersAverage);
-        console.log(answersDom);
 
         resultWindow.innerHTML += `
             <div><h3>${currentPoll['name-poll']}</h3></div>
@@ -402,10 +374,19 @@ function showResults(id, currentPoll) {
             }
             for (let j = 1; j <= 5; j++) {
                 answersDom[numAlt][j] = ((answersDom[numAlt][j]/sumOfAnsw) * 100).toFixed(2);
-                if (answersDom[numAlt][j] >= 6.00) {
-                    res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${answersDom[numAlt][j]}</div>`;
-                } else if (answersDom[numAlt][j] <= 6.00 || answersDom[numAlt][j] > 0.00) {
-                    res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">&nbsp</div>`;
+                const screenWidth = window.screen.width;
+                if (screenWidth > 720) {
+                    if (answersDom[numAlt][j] >= 6.00) {
+                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${answersDom[numAlt][j]}</div>`;
+                    } else if (answersDom[numAlt][j] <= 6.00 || answersDom[numAlt][j] > 0.00) {
+                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">&nbsp</div>`;
+                    }
+                } else {
+                    if (answersDom[numAlt][j] >= 20.00) {
+                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${answersDom[numAlt][j]}</div>`;
+                    } else if (answersDom[numAlt][j] <= 20.00 || answersDom[numAlt][j] > 0.00) {
+                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">&nbsp</div>`;
+                    }
                 }
             }
             
@@ -413,5 +394,3 @@ function showResults(id, currentPoll) {
         }
     });
 }
-
-
