@@ -277,8 +277,7 @@ function showHeadWindow(id) {
                     let str = '';
                     for (let j = 1; j <= 5; j++) { //5 == i
                         str += `<input type="radio" name="answer-to-${temp}" value="${j}">
-                            <img class='scale-img' src="${currentPoll['scale-src-'+j]}">
-                        </input>`
+                            <img class='scale-img' src="${currentPoll['scale-src-'+j]}">`
                     }
                     temp+=1;
                     return str;
