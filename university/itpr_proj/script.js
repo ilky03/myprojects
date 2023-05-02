@@ -96,8 +96,8 @@ applyCreateBtn.addEventListener('click', () => {
 
         postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json', json)
             .then(data => {
-                console.log(data);
-                let id = data.id;
+                console.log(data.name);
+                let id = data.name;
                 succesWindow.innerHTML = `
                     <div><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
                     <div>Щоб інші користувачі змогли приєднатись - надайте їм ID ${id}</div>
