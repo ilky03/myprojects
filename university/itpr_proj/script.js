@@ -331,6 +331,7 @@ function showResults(id, currentPoll) {
 
         resultWindow.innerHTML += `
             <div><h3>${currentPoll['name-poll']}</h3></div>
+            <div><h5>ID опитування: ${id}</h5></div>
             <div class = "example">
                 <div class = "r1">1</div>
                 <div class = "r2">2</div>

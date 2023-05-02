@@ -204,15 +204,18 @@ form img {
     .results {
         width: auto;
     }
-    input, select, button {
-        width: 80%;
-        height: 60px;
-    }
+
     .altern-img {
         width: 90%;
         height: auto;
     }
+
 }
 
-
+@media(max-width: 1000px) {
+    input, select, button {
+        width: 80%;
+        height: 60px;
+    }
+}
 
