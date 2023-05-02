@@ -189,9 +189,16 @@ form img {
     display: flex;
     align-items: center;
     justify-content: space-around;
-
 }
 
+.poll-stat h4, .result-window h4 {
+    margin-top: 20px;
+}
+
+.poll-stat h5 {
+    margin: 0;
+    padding: 0;
+}
 
 
 

@@ -37,8 +37,9 @@ applyCreateBtn.addEventListener('click', () => {
             // scaleType.disabled = true;
             let type = scaleType.value;
 
-            if (type == "video" || type == "image") {
-                let amountScale = +prompt('Скільки буде зображень/відео для шкали оцінювання?');
+            if (type == "image") {
+                // let amountScale = +prompt('Скільки буде зображень для шкали оцінювання?');
+                let amountScale = 5;
                 for (let i = 1; i <= amountScale; i++) {
                     createForm.insertAdjacentHTML("beforeend", `
                         <div>
@@ -93,7 +94,7 @@ applyCreateBtn.addEventListener('click', () => {
         let formData = new FormData(createForm);
         let json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-        postData('http://localhost:3000/createdforms', json)
+        postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json', json)
             .then(data => {
                 console.log(data);
                 let id = data.id;
@@ -133,7 +134,7 @@ joinBtn.addEventListener('click', () => {
 
     const chooseIdBtn = document.querySelector('.choose-id-btn');
     chooseIdBtn.addEventListener('click', () => {
-        let pollId = +document.querySelector('#poll-id').value;
+        let pollId = document.querySelector('#poll-id').value;
         joinWindow.classList.add('hide');
         headWindow.classList.remove('hide');
         showHeadWindow(pollId);
@@ -155,16 +156,17 @@ const getResource = async (url) => {
 
 function showHeadWindow(id) {
 
-    getResource('http://localhost:3000/createdforms')
+    getResource('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json')
         .then(data => {
-            console.log(data);
 
-            const pollData = {};
-            for (const [key, value] of data.entries()) {
-                pollData[key] = value;
-            }
-            let currentPoll = pollData[id];
-            console.log(currentPoll);
+            let currentPoll = data[id];
+
+            // const pollData = {};
+            // for (const [key, value] of data.entries()) {
+            //     pollData[key] = value;
+            // }
+            // let currentPoll = pollData[id];
+            // console.log(currentPoll);
             headWindow.innerHTML += `
                 <h2>${currentPoll['name-poll']}</h2>
                 <form class="answer-form">
@@ -244,7 +246,7 @@ function showHeadWindow(id) {
         
                 let json = JSON.stringify(Object.fromEntries(formData.entries()));
                 
-                postData('http://localhost:3000/answers', json)
+                postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/answers.json', json)
                 .then(data => {
                 console.log(data);
                 })
@@ -271,19 +273,9 @@ function showHeadWindow(id) {
                     temp += 1;
                     return str;
                 }
-                else if (currentPoll['scale-type'] == 'video') {
-                    let str = '';
-                    for (let j = 1; j <= i; j++) {
-                        str += `<input type="radio" name="answer-to-${temp}" value="${j}">
-                            ${currentPoll['scale-src-'+j]}
-                        </input>`
-                    }
-                    temp+=1;
-                    return str;
-                }
                 else if (currentPoll['scale-type'] == 'image') {
                     let str = '';
-                    for (let j = 1; j <= i; j++) {
+                    for (let j = 1; j <= 5; j++) { //5 == i
                         str += `<input type="radio" name="answer-to-${temp}" value="${j}">
                             <img class='scale-img' src="${currentPoll['scale-src-'+j]}">
                         </input>`
@@ -309,29 +301,35 @@ function showHeadWindow(id) {
 const resultWindow = document.querySelector('.result-window');
 
 function showResults(id, currentPoll) {
-    console.log(currentPoll);
-    getResource('http://localhost:3000/answers')
+    getResource('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/answers.json')
     .then(data => {
-        const answers = {};
-        let counter = 0;
-        for (const [key, value] of data.entries()) {
-            answers[key] = value;
-            counter++;
+        const answers = data;
+        let answersToThisPoll = [];
+        for (let key in answers) {
+            if (answers[key].pollId == id) {
+                answersToThisPoll.push(answers[key]);
+            }
         }
-        
+        console.log(answersToThisPoll);
+
+        // for (const [key, value] of data.entries()) {
+        //     answers[key] = value;
+        //     counter++;
+        // }
+    
         //обчислення
-        let countOfAnswers = 0;
+        let countOfAnswers = answersToThisPoll.length;
         let numOfAltern = 0;
         let answersAverage = {};
         let sum = 0;
         let answersDom = {};
 
-        for (let i = 0; i < counter; i++) {
-            let answer = answers[i];
-            if (answer.pollId == id) {
-                countOfAnswers++;
-            }
-        }
+        // for (let i = 0; i < counter; i++) {
+        //     let answer = answers[i];
+        //     if (answer.pollId == id) {
+        //         countOfAnswers++;
+        //     }
+        // }
 
         for (key in currentPoll) {
             if (key.includes('altern-name')) {
@@ -343,16 +341,14 @@ function showResults(id, currentPoll) {
             answersDom[j] = {'1':0,'2':0,'3':0,'4':0,'5':0};
         }
 
-        console.log(answersDom);
+        // console.log(answersDom);
         console.log('Відповідей: ' + countOfAnswers + ' ' + '\nК-сть альтернатив: ' + numOfAltern);
         
         for (let k = 1; k <= numOfAltern; k++) {
-            for (let i = 0; i < counter; i++) {
-                let answer = answers[i];
-                if (answer.pollId == id) {
-                    sum += +answer[`answer-to-${k}`];
-                    answersDom[k][answer[`answer-to-${k}`]]++;
-                }    
+            for (let i = 0; i < countOfAnswers; i++) {
+                let answer = answersToThisPoll[i];
+                sum += +answer[`answer-to-${k}`];
+                answersDom[k][answer[`answer-to-${k}`]]++; 
             }
             answersAverage[`answer-average-${k}`] = (sum / countOfAnswers).toFixed(2);
             sum = 0;
@@ -380,6 +376,22 @@ function showResults(id, currentPoll) {
                     ${calcDom(i)}
                 </div>`;
         }
+
+        const date = new Date();
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+
+        const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}`;
+
+
+        resultWindow.innerHTML += `
+            <div class="poll-stat"><h4>Статистика опитування</h4>
+            <h5>Дата проходження: ${formattedDate}</h5>
+            <h5>Кількість відповідей: ${countOfAnswers}</h5></div>
+        `;
 
         function calcDom(numAlt) {
             let sumOfAnsw = 0;
