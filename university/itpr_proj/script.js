@@ -59,7 +59,7 @@ applyCreateBtn.addEventListener('click', () => {
                 for (let i = 1; i <= amountAltern; i++) {
                     createForm.insertAdjacentHTML("beforeend", `
                         <div>
-                            <label for="altern-src-${i}">Для альтернативи ${i}</label> 
+                            <label for="altern-src-${i}">Ресурс для альтернативи ${i}</label> 
                             <input id="altern-src-${i}" type="text" name="altern-src-${i}" placeholder="Уведіть посилання" required />
                         </div>
                     `);
@@ -95,7 +95,7 @@ applyCreateBtn.addEventListener('click', () => {
             .then(data => {
                 let id = data.name;
                 succesWindow.innerHTML = `
-                    <div><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
+                    <div class="header-succes"><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
                     <div>Щоб інші користувачі змогли приєднатись - надайте їм ID ${id}</div>
                     <button class='btn go-head'>Перейти до опитування</button>
                     <button class='btn go-welcome'>Повернутись на головну</button>
@@ -274,11 +274,21 @@ function showHeadWindow(id) {
                     return str;
                 }
                 else if (currentPoll['scale-type'] == 'image') {
-                    let str = '';
+                    let str = '<div style = "display: flex; flex-wrap: wrap; justify-content: center;">';
                     for (let j = 1; j <= 5; j++) { //5 == i
-                        str += `<input type="radio" name="answer-to-${temp}" value="${j}">
-                            <img class='scale-img' src="${currentPoll['scale-src-'+j]}">`
+                        str += `
+                            <div class="radio-tile-group">
+                                <div class="input-container">
+                                    <input class="radio-button" name="answer-to-${temp}" value="${j}" type="radio">
+                                    <div class="radio-tile">
+                                        <div>
+                                            <img src="${currentPoll['scale-src-'+j]}" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
                     }
+                    str += '</div>'
                     temp+=1;
                     return str;
                 }
