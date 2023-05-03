@@ -98,7 +98,7 @@ applyCreateBtn.addEventListener('click', () => {
                 let id = data.name;
                 succesWindow.innerHTML = `
                     <div class="header-succes"><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
-                    <div>Щоб інші користувачі змогли приєднатись - надайте їм ID ${id}</div>
+                    <div>Щоб інші користувачі змогли приєднатись - надайте їм ID: <strong>${id}</strong></div>
                     <button class='btn go-head'>Перейти до опитування</button>
                     <button class='btn go-welcome'>Повернутись на головну</button>
                 `;
