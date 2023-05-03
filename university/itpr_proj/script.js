@@ -2,9 +2,11 @@ const welcomeWindow = document.querySelector('.welcome-window'),
       createWindow = document.querySelector('.create-window'),
       createPollBtn = document.querySelector('.create-poll'),
       succesWindow = document.querySelector('.succes-window');
+      welcomeFooter = document.querySelector('.footer-welcome');
 
 createPollBtn.addEventListener('click', () => {
     welcomeWindow.classList.add('hide');
+    welcomeFooter.classList.add('hide');
     createWindow.classList.remove('hide');
 });
 
@@ -126,6 +128,7 @@ joinWindow = document.querySelector('.join-window');
 
 joinBtn.addEventListener('click', () => {
     welcomeWindow.classList.add('hide');
+    welcomeFooter.classList.add('hide');
     joinWindow.classList.remove('hide');
 
     const chooseIdBtn = document.querySelector('.choose-id-btn');

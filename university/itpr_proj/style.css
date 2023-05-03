@@ -276,20 +276,21 @@ form img {
         object-fit: cover;
     }
 
-footer {
+.footer-welcome {
+    position: fixed;
     bottom: 10px;
     width: 100%;
     text-align: center;
 }
 
-footer a {
+.footer-welcome a {
     text-decoration: none;
     color:rgb(75, 0, 130);
     opacity: 0.5;
     transition: .5s;
 }
 
-footer a:hover {
+.footer-welcome a:hover {
     opacity: 1;
 }
 
