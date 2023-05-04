@@ -52,10 +52,13 @@ applyCreateBtn.addEventListener('click', () => {
                 let type = scaleType.value;
 
                 if (type == "image") {
+                    scaleType.disabled = true;
                     let amountScale = 5;
                     for (let i = 1; i <= amountScale; i++) {
+
                         createForm.insertAdjacentHTML("beforeend", `
                             <div>
+                                <input type="hidden" name="scale-type" value="image" />
                                 <label for="scale-src-${i}">Для шкали оцінювання ${i}</label> 
                                 <input id="scale-src-${i}" type="text" name="scale-src-${i}" placeholder="Уведіть посилання" required />
                             </div>
@@ -71,6 +74,8 @@ applyCreateBtn.addEventListener('click', () => {
                 let type = alternType.value;
 
                 if (type == "video" || type == "image") {
+                    alternType.disabled = true;
+                    createForm.insertAdjacentHTML("beforeend", `<input type="hidden" name="altern-type" value=${type} />`);
                     for (let i = 1; i <= amountAltern; i++) {
                         createForm.insertAdjacentHTML("beforeend", `
                             <div>
@@ -130,6 +135,7 @@ applyCreateBtn.addEventListener('click', () => {
                             showHeadWindow(id);
                         });
                         document.querySelector('.go-welcome').addEventListener('click', () => {
+                            arrow.classList.add('hide');
                             succesWindow.classList.add('hide');
                             welcomeWindow.classList.remove('hide');
                             createForm.reset();
