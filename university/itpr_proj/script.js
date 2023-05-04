@@ -125,7 +125,7 @@ applyCreateBtn.addEventListener('click', () => {
                             <div class="header-succes"><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
                             <div>Щоб інші користувачі змогли приєднатись - надайте їм ID: <p id="text-to-copy"><strong>${id}</strong></p></div>
                             <p class="success"></p>
-                            <button class='btn copy-id'>Скопіювати ID</button>
+                            <button class='btn copy-id'>Скопіювати ID</button><br>
                             <button class='btn go-head'>Перейти до опитування</button>
                             <button class='btn go-welcome'>Повернутись на головну</button>
                         `;
