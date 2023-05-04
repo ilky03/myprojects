@@ -123,22 +123,34 @@ applyCreateBtn.addEventListener('click', () => {
                         let id = data.name;
                         succesWindow.innerHTML = `
                             <div class="header-succes"><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
-                            <div>Щоб інші користувачі змогли приєднатись - надайте їм ID: <strong>${id}</strong></div>
+                            <div>Щоб інші користувачі змогли приєднатись - надайте їм ID: <p id="text-to-copy"><strong>${id}</strong></p></div>
+                            <p class="success"></p>
+                            <button class='btn copy-id'>Скопіювати ID</button>
                             <button class='btn go-head'>Перейти до опитування</button>
                             <button class='btn go-welcome'>Повернутись на головну</button>
                         `;
                         document.querySelector('.create-quest-altern').classList.remove('hide');
+                        
+                        function copyText() {
+                            const textToCopy = document.getElementById("text-to-copy");
+                            const tempTextArea = document.createElement("textarea");
+                            tempTextArea.value = textToCopy.innerText;
+                            document.body.appendChild(tempTextArea);
+                            tempTextArea.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(tempTextArea);
+                            document.querySelector('.success').textContent = "ID успішно скопійовано!";
+                        }
 
+                        let copyIdBtn = document.querySelector('.copy-id');
+                        copyIdBtn.addEventListener('click', () => copyText());
                         document.querySelector('.go-head').addEventListener('click', () => {
                             succesWindow.classList.add('hide');
                             headWindow.classList.remove('hide');
                             showHeadWindow(id);
                         });
                         document.querySelector('.go-welcome').addEventListener('click', () => {
-                            arrow.classList.add('hide');
-                            succesWindow.classList.add('hide');
-                            welcomeWindow.classList.remove('hide');
-                            createForm.reset();
+                            location.reload();
                         });
                     })
                     .catch(error => console.error(error));
@@ -324,7 +336,7 @@ function showHeadWindow(id) {
                         str += `
                             <div class="radio-tile-group">
                                 <div class="input-container">
-                                    <input class="radio-button" name="answer-to-${temp}" value="${j}" type="radio">
+                                    <input class="radio-button" name="answer-to-${temp}" value="${j}" type="radio" required>
                                     <div class="radio-tile">
                                         <div>
                                             <img src="${currentPoll['scale-src-'+j]}" alt="img">
