@@ -48,7 +48,7 @@ input:focus, select:focus {
 }
 
 .create-window, .welcome-window, .head-window, .join-window, .result-window, .succes-window {
-    min-width: 200px;
+    min-width: 230px;
     max-width: 500px;
     margin: 20px;
     border-radius: 50px;
@@ -80,6 +80,21 @@ input:focus, select:focus {
     margin: 20px 0;
 }
 
+.arrow {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    opacity: .5;
+}
+
+.arrow:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.arrow img {
+    width: 30px;
+}
 
 form img {
     border-radius: 50px;
@@ -293,6 +308,16 @@ form img {
 .footer-welcome a:hover {
     opacity: 1;
 }
+
+.error {
+    height: 20px;
+    padding-top: 10px;
+    color: red;
+    font-size: 10px;   
+    font-weight: bold;
+}
+
+
 
 @media(max-width: 720px) {
     .results {

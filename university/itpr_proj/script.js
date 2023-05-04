@@ -1,13 +1,20 @@
 const welcomeWindow = document.querySelector('.welcome-window'),
       createWindow = document.querySelector('.create-window'),
       createPollBtn = document.querySelector('.create-poll'),
-      succesWindow = document.querySelector('.succes-window');
-      welcomeFooter = document.querySelector('.footer-welcome');
+      succesWindow = document.querySelector('.succes-window'),
+      welcomeFooter = document.querySelector('.footer-welcome'),
+      resultWindow = document.querySelector('.result-window'),
+      arrow = document.querySelector('.arrow');
 
 createPollBtn.addEventListener('click', () => {
     welcomeWindow.classList.add('hide');
     welcomeFooter.classList.add('hide');
     createWindow.classList.remove('hide');
+    arrow.classList.remove('hide');
+});
+
+arrow.addEventListener('click', () => {
+    location.reload();
 });
 
 const postData = async (url, data) => {
@@ -25,131 +32,160 @@ const postData = async (url, data) => {
 
 const applyCreateBtn = document.querySelector('.apply-create');
 let amountAltern = 0;
+const createError = document.querySelector('.create-error');
 
 applyCreateBtn.addEventListener('click', () => {
     amountAltern = +document.querySelector('#amount-altern').value;
-    document.querySelector('.create-quest-altern').classList.add('hide');
-    if (amountAltern == 0) return;
+    if (!amountAltern) {
+        createError.textContent = 'Не введено кількість альтернатив!';
+    } else if (amountAltern <= 0 || amountAltern > 100) {
+        createError.textContent = 'Некоректна кількість (>100 або <0)!';
+    } else {
+        document.querySelector('.create-quest-altern').classList.add('hide');
+        if (amountAltern == 0) return;
+  
+        setTimeout(()=> {
+            const scaleType = document.querySelector('#scale-type');
 
-    setTimeout(()=> {
-        const scaleType = document.querySelector('#scale-type');
+            scaleType.addEventListener('change', (e) => {
+                e.preventDefault();
+                let type = scaleType.value;
 
-        scaleType.addEventListener('change', (e) => {
-            e.preventDefault();
-            let type = scaleType.value;
+                if (type == "image") {
+                    let amountScale = 5;
+                    for (let i = 1; i <= amountScale; i++) {
+                        createForm.insertAdjacentHTML("beforeend", `
+                            <div>
+                                <label for="scale-src-${i}">Для шкали оцінювання ${i}</label> 
+                                <input id="scale-src-${i}" type="text" name="scale-src-${i}" placeholder="Уведіть посилання" required />
+                            </div>
+                        `);
+                    }
+                }   
+            
+            });
 
-            if (type == "image") {
-                let amountScale = 5;
-                for (let i = 1; i <= amountScale; i++) {
-                    createForm.insertAdjacentHTML("beforeend", `
-                        <div>
-                            <label for="scale-src-${i}">Для шкали оцінювання ${i}</label> 
-                            <input id="scale-src-${i}" type="text" name="scale-src-${i}" placeholder="Уведіть посилання" required />
-                        </div>
-                    `);
-                }
-            }   
+            const alternType = document.querySelector('#altern-type');
+            alternType.addEventListener('change', (e )=> {
+                e.preventDefault();
+                let type = alternType.value;
+
+                if (type == "video" || type == "image") {
+                    for (let i = 1; i <= amountAltern; i++) {
+                        createForm.insertAdjacentHTML("beforeend", `
+                            <div>
+                                <label for="altern-src-${i}">Ресурс для альтернативи ${i}</label> 
+                                <input id="altern-src-${i}" type="text" name="altern-src-${i}" placeholder="Уведіть посилання" required />
+                            </div>
+                        `);
+                    }
+                } 
+            });
+        }, 1);
+
+        const createForm = document.querySelector('.create-form');
+        createForm.classList.remove('hide');
         
-        });
-
-        const alternType = document.querySelector('#altern-type');
-        alternType.addEventListener('change', (e )=> {
-            e.preventDefault();
-            let type = alternType.value;
-
-            if (type == "video" || type == "image") {
-                for (let i = 1; i <= amountAltern; i++) {
-                    createForm.insertAdjacentHTML("beforeend", `
-                        <div>
-                            <label for="altern-src-${i}">Ресурс для альтернативи ${i}</label> 
-                            <input id="altern-src-${i}" type="text" name="altern-src-${i}" placeholder="Уведіть посилання" required />
-                        </div>
-                    `);
-                }
-            } 
-        });
-    },1);
-
-    const createForm = document.querySelector('.create-form');
-    createForm.classList.remove('hide');
-    
-    for (let i = 1; i <= amountAltern; i++) {
+        for (let i = 1; i <= amountAltern; i++) {
+            createForm.innerHTML += `
+            <div>
+                <label for="altern-name-${i}">Альтернатива ${i}</label> 
+                <input id="altern-name-${i}" type="text" name="altern-name-${i}" placeholder="Уведіть назву" required />
+            </div>
+            `
+        }
         createForm.innerHTML += `
-        <div>
-            <label for="altern-name-${i}">Альтернатива ${i}</label> 
-            <input id="altern-name-${i}" type="text" name="altern-name-${i}" placeholder="Уведіть назву" required />
+        <div style="text-align: center;">
+            <p class="form-error error"></p>
+            <button class="btn create-btn">Створити</button>
         </div>
-        `
+        `;
+
+        createForm.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+
+            let formData = new FormData(createForm);
+            let json = JSON.stringify(Object.fromEntries(formData.entries()));
+            const formError = document.querySelector('.form-error');
+
+            if (!JSON.parse(json)['scale-type']) {
+                formError.textContent = 'Не обрано тип шкали!';
+            } else if (!JSON.parse(json)['altern-type']) {
+                formError.textContent = 'Не обрано тип альтернатив!';
+            } else {
+                postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json', json)
+                    .then(data => {
+                        let id = data.name;
+                        succesWindow.innerHTML = `
+                            <div class="header-succes"><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
+                            <div>Щоб інші користувачі змогли приєднатись - надайте їм ID: <strong>${id}</strong></div>
+                            <button class='btn go-head'>Перейти до опитування</button>
+                            <button class='btn go-welcome'>Повернутись на головну</button>
+                        `;
+                        document.querySelector('.create-quest-altern').classList.remove('hide');
+
+                        document.querySelector('.go-head').addEventListener('click', () => {
+                            succesWindow.classList.add('hide');
+                            headWindow.classList.remove('hide');
+                            showHeadWindow(id);
+                        });
+                        document.querySelector('.go-welcome').addEventListener('click', () => {
+                            succesWindow.classList.add('hide');
+                            welcomeWindow.classList.remove('hide');
+                            createForm.reset();
+                        });
+                    })
+                    .catch(error => console.error(error));
+                createWindow.classList.add('hide');
+                succesWindow.classList.remove('hide');
+            }
+        });
     }
-    createForm.innerHTML += `
-    <div style="text-align: center;">
-        <button class="btn create-btn">Створити</button>
-    </div>
-    `;
-
-    createForm.addEventListener('submit', (event) => {
-        event.preventDefault(); 
-
-        let formData = new FormData(createForm);
-        let json = JSON.stringify(Object.fromEntries(formData.entries()));
-
-        postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json', json)
-            .then(data => {
-                let id = data.name;
-                succesWindow.innerHTML = `
-                    <div class="header-succes"><h3>Вітаємо, ваше опитування успішно створено!</h3></div>
-                    <div>Щоб інші користувачі змогли приєднатись - надайте їм ID: <strong>${id}</strong></div>
-                    <button class='btn go-head'>Перейти до опитування</button>
-                    <button class='btn go-welcome'>Повернутись на головну</button>
-                `;
-                document.querySelector('.create-quest-altern').classList.remove('hide');
-
-                document.querySelector('.go-head').addEventListener('click', () => {
-                    succesWindow.classList.add('hide');
-                    headWindow.classList.remove('hide');
-                    showHeadWindow(id);
-                });
-                document.querySelector('.go-welcome').addEventListener('click', () => {
-                    succesWindow.classList.add('hide');
-                    welcomeWindow.classList.remove('hide');
-                    createForm.reset();
-                });
-            })
-            .catch(error => console.error(error));
-        createWindow.classList.add('hide');
-        succesWindow.classList.remove('hide');
-    });
 });
 
 //Join window 
 
 const joinBtn = document.querySelector('.join-poll'),
-joinWindow = document.querySelector('.join-window');
+      joinWindow = document.querySelector('.join-window'),
+      joinError = document.querySelector('.join-error');
 
+function joinWindowFunc(btnClass) {
+    const btn = document.querySelector(btnClass);
+    btn.addEventListener('click', (event) => {
+        let pollId = document.querySelector('#poll-id').value;
+        if (!pollId.trim()) {
+            console.log('er');
+            joinError.textContent = 'Не уведено ID опитування!';
+        } else {
+            getResource('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json')
+                .then(data => {
+                    let currentPoll = data[pollId];
+                    if(!currentPoll) {
+                        console.log('err');
+                        joinError.textContent = 'Такого ID не існує!'
+                    } else {
+                        if (event.target.classList.value == 'btn choose-id-btn') {
+                            joinWindow.classList.add('hide');
+                            headWindow.classList.remove('hide');
+                            showHeadWindow(pollId);
+                        } else if (event.target.classList.value == 'btn check-id-btn') {
+                            showResults(pollId, currentPoll);
+                            joinWindow.classList.add('hide');
+                            resultWindow.classList.remove('hide');
+                        }   
+                    }
+                });
+            }
+    });
+}
 joinBtn.addEventListener('click', () => {
     welcomeWindow.classList.add('hide');
     welcomeFooter.classList.add('hide');
     joinWindow.classList.remove('hide');
+    arrow.classList.remove('hide');
+    joinWindowFunc('.check-id-btn');
+    joinWindowFunc('.choose-id-btn');
 
-    const chooseIdBtn = document.querySelector('.choose-id-btn');
-    const checkIdBtn = document.querySelector('.check-id-btn');
-    chooseIdBtn.addEventListener('click', () => {
-        let pollId = document.querySelector('#poll-id').value;
-        joinWindow.classList.add('hide');
-        headWindow.classList.remove('hide');
-        showHeadWindow(pollId);
-    });
-
-    checkIdBtn.addEventListener('click', () => {
-        let pollId = document.querySelector('#poll-id').value;
-        joinWindow.classList.add('hide');
-        resultWindow.classList.remove('hide');
-        getResource('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/createdforms.json')
-        .then(data => {
-            let currentPoll = data[pollId];
-            showResults(pollId, currentPoll);
-        });
-    });
 });
 
 //Head window
@@ -252,17 +288,17 @@ function showHeadWindow(id) {
                 
                 postData('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/answers.json', json)
                 .then(data => {
+                    headWindow.classList.add('hide');
+                    resultWindow.classList.remove('hide');
+                    showResults(id, currentPoll);
                 })
                 .catch(error => console.error(error));
         
-                headWindow.classList.add('hide');
-                resultWindow.classList.remove('hide');
-                showResults(id, currentPoll);
             });
 
             function addScale(i) {
                 if (currentPoll['scale-type'] == 'numeric') {
-                    let str = `<input type="number" min="1" max="5" name="answer-to-${temp}">`;
+                    let str = `<input type="number" min="1" max="5" name="answer-to-${temp}" required>`;
                     temp += 1;
                     return str;
                 }
@@ -302,7 +338,6 @@ function showHeadWindow(id) {
 
 //Result window
 
-const resultWindow = document.querySelector('.result-window');
 
 function showResults(id, currentPoll) {
     getResource('https://itpr-231e2-default-rtdb.europe-west1.firebasedatabase.app/answers.json')
@@ -362,7 +397,9 @@ function showResults(id, currentPoll) {
                 </div>`;
         }
 
-        const date = new Date();
+
+        let kievDate = new Date().toLocaleString('en-US', { timeZone: 'Europe/Kiev' });
+        let date = new Date(kievDate);
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
@@ -391,13 +428,15 @@ function showResults(id, currentPoll) {
                 if (screenWidth > 720) {
                     if (answersDom[numAlt][j] >= 6.00) {
                         res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${answersDom[numAlt][j]}</div>`;
-                    } else if (answersDom[numAlt][j] <= 6.00 || answersDom[numAlt][j] > 0.00) {
-                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">&nbsp</div>`;
+                    } else if (answersDom[numAlt][j] <= 6.00 && answersDom[numAlt][j] > 0.00) {
+                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${Math.round(answersDom[numAlt][j])}</div>`;
                     }
                 } else {
                     if (answersDom[numAlt][j] >= 20.00) {
                         res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${answersDom[numAlt][j]}</div>`;
-                    } else if (answersDom[numAlt][j] <= 20.00 || answersDom[numAlt][j] > 0.00) {
+                    } else if (answersDom[numAlt][j] <= 20.00 && answersDom[numAlt][j] >= 4.00) {
+                        res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">${Math.round(answersDom[numAlt][j])}</div>`;
+                    } else if (answersDom[numAlt][j] < 4.00 && answersDom[numAlt][j] > 0.00) {
                         res += `<div class = "r${j}" style="width:${answersDom[numAlt][j]}%;">&nbsp</div>`;
                     }
                 }

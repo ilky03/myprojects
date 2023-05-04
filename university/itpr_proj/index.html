@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="arrow hide"><img src="img/backarrow.svg"></div>
     <div class="welcome-window">
         <div><img src="img/icon.svg" alt="icon" width="20px"></div>
         <button class="btn create-poll">Створити опитування</button>
@@ -21,7 +22,9 @@
         <div class="create-quest-altern">
             <div>
                 <label for="amount-altern">Кількість альтернатив</label> 
-                <input id="amount-altern" type="number" name="amount-altern" min="1" required />
+                <br>
+                <p class="create-error error"></p>
+                <input id="amount-altern" type="number" name="amount-altern" />
             </div>
             <div style="text-align: center;">
                 <button class="apply-create btn">Далі</button>
@@ -30,7 +33,7 @@
         <form action="#" class="create-form hide">
             <div>
                 <label for="name-poll">Назва опитування</label> 
-                <input id="name-poll" type="text" name="name-poll" required/>
+                <input id="name-poll" type="text" name="name-poll"/>
             </div>
             <div>
                 <label for="scale-type">Тип шкали оцінювання</label> 
@@ -44,14 +47,14 @@
             </div>
             <div>
                 <label for="altern-type">Тип альтернатив</label> 
-                <select name="altern-type" id="altern-type">
+                <select name="altern-type" id="altern-type" required>
                     <option selected disabled>Оберіть тип альтернатив</option>
                     <option value="text">Текст</option>
                     <option value="image">Зображення</option>
                     <option value="video">Відео</option>
                 </select>
             </div>
-            </form>
+        </form>
         
     </div>
 
@@ -60,8 +63,9 @@
 
     <div class="join-window hide">
         <div>
-            <label for="poll-id">Уведіть id опитування</label> 
-            <input id="poll-id" type="text" min="1" name="poll-id" required/>
+            <label for="poll-id">Уведіть ID опитування</label><br>
+            <p class="join-error error"></p>
+            <input id="poll-id" type="text" min="1" name="poll-id" required/><br>
             <button class="btn choose-id-btn">Приєднатись</button>
             <button class="btn check-id-btn">Результати</button>
         </div>
