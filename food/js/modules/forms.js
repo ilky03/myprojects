@@ -9,8 +9,8 @@ function forms(formSelector, modalTimerId) {
 
     const message = {
         loading: 'img/modal/spinner.svg',
-        failure: 'Что-то пошло не так :(',
-        success: 'Мы получили ваши данные, спасибо!'
+        failure: 'Something went wrong :(',
+        success: 'We received your data, thank you!'
     };
 
     function bindPostData(form) {

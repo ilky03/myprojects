@@ -1,87 +1,9 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Bonheur+Royale&display=swap');
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    color: #FEFEFE;
-    font-family: 'Be Vietnam Pro', sans-serif;
-}
-
-a {
-    text-decoration: none;
-}   
-
-#projects {
-    background-color: #FEFEFE;
-    color: #897CB1;
-    padding: 50px 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    -webkit-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-    -moz-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-    box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6) inset;
-}
-
-.projects {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    max-width: 1700px;
-}
-
-.project-link {
-    margin: 10px;
-    transition: .8s;
-}
-
-.project-link:hover {
-    transform: translateY(-10px);
-    background-color: #897CB1;
-    color: #fefefe;
-    -webkit-box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
-    -moz-box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
-    box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
-    border-radius: 30px;
-}
-
-.project-img {
-    height: 350px;
-    width: 90%;
-    object-fit: cover;
-    border-radius: 30px;
-    padding-top: 10px;
-}
-
-@media (max-width: 1200px) {
-    .projects {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-    }
-}
-
-@media (max-width: 800px) {
-    .projects {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-    }
-}
-
-@media  (max-width: 400px) {
-    #projects {
-        display: block;
-    }
-
-    .project-img {
-        height: 200px;
-    }
-}
- */
-
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Bonheur+Royale&display=swap');
+
+@font-face {
+    font-family: 'PixelFont';
+    src: url("fonts/PixelFont.ttf");
+}
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -90,14 +12,14 @@ a {
 .theme-light {
     --color-primary: #dfe8e8;
     --color-secondary: #fbfbfe;
-    --color-accent: #f6e145;
+    --color-accent: #897CB1;
     --font-color: #897CB1;
 }
 
 .theme-dark {
     --color-primary: #626c74;
     --color-secondary: #2a2c2d;
-    --color-accent: #f6e145;
+    --color-accent: #574b7a;
     --font-color: #ffffff;
 }
 
@@ -126,6 +48,8 @@ a {
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 0 20px;
+    text-align: center;
 }
 
 .main {
@@ -143,17 +67,31 @@ a {
     opacity: 1;
 }
 
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-auto-flow: row;
+    gap: 40px;
+    align-items: center;
+    margin: 40px 20px;
+}
+
 .card {
+    display: block;
     transition: .5s;
     border-radius: .5px solid;
     background-color: var(--color-primary);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+    width: 100%;
+    height: 500px;
+    text-align: justify;
 }
 
-.card:hover {
+.card:hover, .flappy-block:hover {
     transform: translateY(-10px);
-    background-color: #897CB1;
+    background-color: var(--color-accent);
     color: #fefefe;
     -webkit-box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
     -moz-box-shadow: 0px 5px 52px 12px rgba(34, 60, 80, 0.42);
@@ -162,6 +100,55 @@ a {
 }
 
 .card img {
-    max-width: 400px;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 15px;    
+}
+
+.flappy-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('img/flappy.gif');
+    background-color: rgba(0, 0, 0, .5);
+    background-blend-mode: multiply;
+    background-position: center;
+    text-align: center;
+    grid-column: span 3;
+    border-radius: 15px;
+    height: 300px;
+    width: 100%;
+    color: #fff;
+    transition: .5s;
+}
+
+.flappy-block h3 {
+    font-family: 'PixelFont', cursive;
+    font-size: 30px;
+}
+
+
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto;
+    }
+
+    .flappy-block {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 800px) {
+    .container {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto auto;
+        .flappy-block {
+            grid-column: span 1;
+        }
+    }
+
+    .card {
+        height: auto;
+    }
 }
