@@ -22,5 +22,13 @@ function toggleTheme() {
     }
 })();
 
+const showMoreBtn = document.querySelector('.show-more-btn');
+const hiddenCard = document.querySelector('.card-extented__hidden');
+
+showMoreBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    hiddenCard.classList.toggle('hide');
+});
+
 
 

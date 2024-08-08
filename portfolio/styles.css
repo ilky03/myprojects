@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=Bonheur+Royale&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 @font-face {
     font-family: 'PixelFont';
@@ -80,7 +81,6 @@ a {
 .card {
     display: block;
     transition: .5s;
-    border-radius: .5px solid;
     background-color: var(--color-primary);
     padding: 20px;
     border-radius: 15px;
@@ -102,6 +102,140 @@ a {
 .card img {
     width: 100%;
     border-radius: 15px;    
+}
+
+.card-extented {
+    grid-column: span 3;
+    height: auto;
+    padding: 0;
+    overflow: hidden;
+    background: none;
+    position: relative;
+    height: 650px;
+    max-height: 90vh;
+    z-index: 1;
+    text-align: center;
+}
+
+.card-extented h3, .card-extented__hidden h3 {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    margin: 0;
+} 
+
+.card-extented h3 {
+    font-size: 50px;
+}
+
+.card-extented__cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    height: 100%;
+}
+
+.card-extented__cover::after {
+    display: block;
+    position: absolute;
+    content: "";
+    background-color: rgba(0, 0, 0, .3);
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+}
+
+.card-extented__cover video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: -2;
+}
+
+.card-extented__cover div {
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+.card-extented__cover p {
+    max-width: 1000px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.card-extented__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin-bottom: 40px;
+}
+
+.card-extented__wrapper div {
+    place-content: center;
+}
+
+.card-extented__wrapper:last-child {
+    margin-bottom: 0;
+}
+
+.card-extented__wrapper video {
+    border-radius: 15px;   
+}
+
+.show-more-btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 20px;
+    background: none;
+    border: none;
+    z-index: 2;
+}
+
+.show-more-btn img {
+    height: 40px;
+    width: 40px;
+}
+
+.show-more-btn:hover {
+    cursor: pointer;
+}
+
+.show-more-btn:hover img {
+    filter: invert(15%);
+}
+
+.card-extented__hidden {
+    grid-column: span 3;
+}
+
+.card-extented__wrapper div {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-extented__wrapper p {
+    max-width: 300px;
+}
+
+hr {
+    border: none;
+    height: 5px;
+    width: 100px;
+    border-radius: 100px;
+    background-color: var(--color-accent);
 }
 
 .flappy-block {
@@ -134,8 +268,16 @@ a {
         grid-template-rows: auto auto auto;
     }
 
-    .flappy-block {
+    .flappy-block, .card-extented, .card-extented__hidden {
         grid-column: span 2;
+    }
+    
+    .card-extented__cover {
+        max-height: 50vh;
+    }
+
+    .card-extented__wrapper h3 {
+        font-size: 30px;
     }
 }
 
@@ -143,12 +285,21 @@ a {
     .container {
         grid-template-columns: auto;
         grid-template-rows: auto auto auto auto;
-        .flappy-block {
-            grid-column: span 1;
-        }
+    }
+
+    .flappy-block, .card-extented, .card-extented__hidden {
+        grid-column: span 1;
     }
 
     .card {
         height: auto;
+    }
+
+    .card-extented__wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-color: var(--color-primary);
+        padding: 10px;
+        border-radius: 15px;
     }
 }
